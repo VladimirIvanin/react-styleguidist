@@ -1,18 +1,18 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Usage should render methods table 1`] = `
 <div>
   <MethodsRenderer
     methods={
-      Array [
-        Object {
+      [
+        {
           "description": "Sets the counter to a particular value.",
           "name": "set",
-          "params": Array [
-            Object {
+          "params": [
+            {
               "description": "New value for the counter.",
               "name": "newValue",
-              "type": Object {
+              "type": {
                 "name": "Number",
               },
             },
@@ -29,12 +29,12 @@ exports[`Usage should render props table 1`] = `
 <div>
   <PropsRenderer
     props={
-      Array [
-        Object {
+      [
+        {
           "description": "Button label.",
           "name": "children",
           "required": true,
-          "type": Object {
+          "type": {
             "name": "string",
           },
         },

@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Markdown Pre should render a pre 1`] = `
 <pre
@@ -12,7 +12,7 @@ exports[`Markdown Pre should render highlighted code 1`] = `
 <pre
   className="lang-html rsg--pre-0"
   dangerouslySetInnerHTML={
-    Object {
+    {
       "__html": "<button>OK</button>",
     }
   }

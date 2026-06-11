@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`SectionHeading prevent the heading level from exceeding the maximum allowed by the Heading component 1`] = `
 <div
@@ -84,7 +84,7 @@ exports[`SectionHeading should forward slot properties to the toolbar 1`] = `
     <Slot
       name="slot"
       props={
-        Object {
+        {
           "bar": "baz",
           "foo": 1,
         }

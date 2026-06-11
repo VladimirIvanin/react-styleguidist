@@ -74,7 +74,7 @@ it('should throw if required field is undefined', () => {
 			},
 			''
 		);
-	expect(fn).toThrowError('config option is required');
+	expect(fn).toThrow('config option is required');
 });
 
 it('should throw with custom message returned by required function', () => {
@@ -88,7 +88,7 @@ it('should throw with custom message returned by required function', () => {
 			},
 			''
 		);
-	expect(fn).toThrowError('Not good');
+	expect(fn).toThrow('Not good');
 });
 
 it('should throw when type in schema is incorrect', () => {
@@ -104,7 +104,7 @@ it('should throw when type in schema is incorrect', () => {
 			},
 			''
 		);
-	expect(fn).toThrowError('Wrong type');
+	expect(fn).toThrow('Wrong type');
 });
 
 it('should check type for number', () => {
@@ -135,7 +135,7 @@ it('should throw when field is not a number', () => {
 			},
 			''
 		);
-	expect(fn).toThrowError('config option should be');
+	expect(fn).toThrow('config option should be');
 });
 
 it('should check type for string', () => {
@@ -166,7 +166,7 @@ it('should throw when field is not a string', () => {
 			},
 			''
 		);
-	expect(fn).toThrowError('config option should be');
+	expect(fn).toThrow('config option should be');
 });
 
 it('should check type for boolean', () => {
@@ -197,7 +197,7 @@ it('should throw when field is not a boolean', () => {
 			},
 			''
 		);
-	expect(fn).toThrowError('config option should be');
+	expect(fn).toThrow('config option should be');
 });
 
 it('should check type for array', () => {
@@ -228,7 +228,7 @@ it('should throw when field is not an array', () => {
 			},
 			''
 		);
-	expect(fn).toThrowError('config option should be');
+	expect(fn).toThrow('config option should be');
 });
 
 it('should check type for function', () => {
@@ -259,7 +259,7 @@ it('should throw when field is not a function', () => {
 			},
 			''
 		);
-	expect(fn).toThrowError('config option should be');
+	expect(fn).toThrow('config option should be');
 });
 
 it('should check type for object', () => {
@@ -290,7 +290,7 @@ it('should throw when field is not an object', () => {
 			},
 			''
 		);
-	expect(fn).toThrowError('config option should be');
+	expect(fn).toThrow('config option should be');
 });
 
 it('should check type for file path', () => {
@@ -336,7 +336,7 @@ it('should throw when file does not exist', () => {
 			},
 			__dirname
 		);
-	expect(fn).toThrowError('does not exist');
+	expect(fn).toThrow('does not exist');
 });
 
 it('should check type for directory path', () => {
@@ -382,7 +382,7 @@ it('should throw with correct type name', () => {
 			},
 			''
 		);
-	expect(fn).toThrowError('config option should be object, received null');
+	expect(fn).toThrow('config option should be object, received null');
 });
 
 it('should pass value to a custom process function', () => {
@@ -393,7 +393,7 @@ it('should pass value to a custom process function', () => {
 		{
 			food: {
 				type: ['boolean', 'string'],
-				process: val => (val === true ? 'pizza' : val),
+				process: (val) => (val === true ? 'pizza' : val),
 			},
 		},
 		''
@@ -413,7 +413,7 @@ it('should not throw if process function returns value for undefined required fi
 			},
 			''
 		);
-	expect(fn).not.toThrowError('config option is required');
+	expect(fn).not.toThrow('config option is required');
 });
 
 it('should throw when directory does not exist', () => {
@@ -429,7 +429,7 @@ it('should throw when directory does not exist', () => {
 			},
 			__dirname
 		);
-	expect(fn).toThrowError('does not exist');
+	expect(fn).toThrow('does not exist');
 });
 
 it('should throw for unknown options', () => {
@@ -444,7 +444,7 @@ it('should throw for unknown options', () => {
 			},
 			''
 		);
-	expect(fn).toThrowError('Unknown config option');
+	expect(fn).toThrow('Unknown config option');
 });
 
 it('should throw for unknown options with suggestion', () => {
@@ -459,7 +459,7 @@ it('should throw for unknown options with suggestion', () => {
 			},
 			''
 		);
-	expect(fn).toThrowError('Did you mean');
+	expect(fn).toThrow('Did you mean');
 });
 
 it('should warn for deprecated options', () => {
@@ -478,7 +478,9 @@ it('should warn for deprecated options', () => {
 		''
 	);
 	expect(result.food).toBe('pizza');
-	expect(warn).toBeCalledWith(expect.stringMatching('config option is deprecated. Don’t use!'));
+	expect(warn).toHaveBeenCalledWith(
+		expect.stringMatching('config option is deprecated. Don’t use!')
+	);
 });
 
 it('should throw for removed options', () => {
@@ -494,5 +496,5 @@ it('should throw for removed options', () => {
 			},
 			''
 		);
-	expect(fn).toThrowError('was removed');
+	expect(fn).toThrow('was removed');
 });

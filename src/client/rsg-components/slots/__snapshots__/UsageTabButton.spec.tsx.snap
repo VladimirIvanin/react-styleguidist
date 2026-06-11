@@ -1,13 +1,13 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`should renderer a button 1`] = `
 <Styled(TabButton)
   name="Pizza"
   onClick={[Function]}
   props={
-    Object {
-      "props": Array [
-        Object {
+    {
+      "props": [
+        {
           "name": "foo",
         },
       ],

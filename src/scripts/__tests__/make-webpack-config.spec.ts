@@ -20,10 +20,15 @@ const styleguideConfig = ({
 } as unknown) as Rsg.SanitizedStyleguidistConfig;
 
 const getClasses = (plugins: WebpackPlugin[] = [], name: string): WebpackPlugin[] =>
-	plugins.filter((x) => x.constructor.name === name);
+	plugins.filter((x) => x && typeof x === 'object' && x.constructor.name === name);
 
 const getClassNames = (plugins: WebpackPlugin[] = []): string[] =>
-	plugins.map((x) => x.constructor.name);
+	plugins
+		.filter((x): x is WebpackPlugin => Boolean(x && typeof x === 'object'))
+		.map((x) => x.constructor.name);
+
+const getPlugins = (plugins: Configuration['plugins']): WebpackPlugin[] =>
+	((plugins || []) as WebpackPlugin[]).filter((x) => x && typeof x === 'object');
 
 const process$env$nodeEnv = process.env.NODE_ENV;
 
@@ -51,7 +56,7 @@ it('should return a production config', () => {
 	const config = makeWebpackConfig(styleguideConfig, env);
 	expect(() => validate(config)).not.toThrow(ValidationError);
 
-	const plugins = getClassNames(config.plugins);
+	const plugins = getClassNames(getPlugins(config.plugins));
 	expect(plugins).toContain('CleanWebpackPlugin');
 	expect(plugins).not.toContain('HotModuleReplacementPlugin');
 
@@ -65,7 +70,10 @@ it('should return a production config', () => {
 	expect(config).toMatchObject({
 		mode: env,
 	});
-	const result = getClasses(config.optimization && config.optimization.minimizer, 'TerserPlugin');
+	const result = getClasses(
+		(config.optimization?.minimizer || []) as WebpackPlugin[],
+		'TerserPlugin'
+	);
 	expect(result).toHaveLength(1);
 });
 
@@ -110,7 +118,9 @@ it('should prepend requires as webpack entries', () => {
 
 it('should enable verbose mode in CleanWebpackPlugin', () => {
 	const result = makeWebpackConfig({ ...styleguideConfig, verbose: true }, 'production');
-	expect((getClasses(result.plugins, 'CleanWebpackPlugin')[0] as any).verbose).toBe(true);
+	expect((getClasses(getPlugins(result.plugins), 'CleanWebpackPlugin')[0] as any).verbose).toBe(
+		true
+	);
 });
 
 it('should set from with assetsDir in CopyWebpackPlugin', () => {
@@ -153,7 +163,7 @@ it('should not owerwrite user DefinePlugin', () => {
 	// Doesn’t really test that values won’t be overwritten, just that
 	// DefinePlugin is applied twice. To write a real test we’d have to run
 	// webpack
-	expect(getClasses(result.plugins, 'DefinePlugin')).toMatchSnapshot();
+	expect(getClasses(getPlugins(result.plugins), 'DefinePlugin')).toMatchSnapshot();
 });
 
 it('should update webpack config', () => {
@@ -184,7 +194,7 @@ it('should pass template context to HTML plugin', () => {
 		},
 		'development'
 	);
-	expect(getClasses(result.plugins, 'MiniHtmlWebpackPlugin')[0]).toMatchObject({
+	expect(getClasses(getPlugins(result.plugins), 'MiniHtmlWebpackPlugin')[0]).toMatchObject({
 		options: {
 			context: template,
 			template: expect.any(Function),
@@ -201,7 +211,7 @@ it('should pass template function to HTML plugin', () => {
 		},
 		'development'
 	);
-	expect(getClasses(result.plugins, 'MiniHtmlWebpackPlugin')[0]).toMatchObject({
+	expect(getClasses(getPlugins(result.plugins), 'MiniHtmlWebpackPlugin')[0]).toMatchObject({
 		options: {
 			context: expect.any(Object),
 			template,
@@ -229,6 +239,7 @@ it('should pass specified mountPointId to HTML plugin', () => {
 		'development'
 	);
 	expect(
-		(getClasses(result.plugins, 'MiniHtmlWebpackPlugin')[0] as any).options.context.container
+		(getClasses(getPlugins(result.plugins), 'MiniHtmlWebpackPlugin')[0] as any).options.context
+			.container
 	).toEqual('foo-bar');
 });

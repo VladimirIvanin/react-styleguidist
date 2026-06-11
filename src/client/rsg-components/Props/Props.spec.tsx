@@ -5,7 +5,7 @@ import { parse } from 'react-docgen';
 import PropsRenderer, { columns, getRowKey } from './PropsRenderer';
 import { unquote, getType, showSpaces, PropDescriptor } from './util';
 
-const propsToArray = (props: any) => Object.keys(props).map(name => ({ ...props[name], name }));
+const propsToArray = (props: any) => Object.keys(props).map((name) => ({ ...props[name], name }));
 
 const getText = (node: { innerHTML: string }): string =>
 	node.innerHTML
@@ -130,13 +130,13 @@ describe('PropsRenderer', () => {
 				]}
 			/>
 		);
-		expect((await findAllByRole('columnheader')).map(node => node.textContent)).toEqual([
+		expect((await findAllByRole('columnheader')).map((node) => node.textContent)).toEqual([
 			'Prop name',
 			'Type',
 			'Default',
 			'Description',
 		]);
-		expect((await findAllByRole('cell')).map(node => node.textContent)).toEqual([
+		expect((await findAllByRole('cell')).map((node) => node.textContent)).toEqual([
 			'color',
 			'string',
 			'tomato',
@@ -289,9 +289,9 @@ describe('props columns', () => {
 
 		expect(getByText('Shape').title).toMatchInlineSnapshot(`
 		"{
-		  \\"bar\\": 123,
-		  \\"qwarc\\": {
-		    \\"si\\": \\"señor\\"
+		  "bar": 123,
+		  "qwarc": {
+		    "si": "señor"
 		  }
 		}"
 	`);
@@ -685,19 +685,19 @@ describe('props columns', () => {
 			const { container } = renderFn(['foo: MyEnum'], [], [options.enum.declaration]);
 			if (options.enum.expect.type === 'enum') {
 				expect(getText(container)).toMatchInlineSnapshot(`
-					"Prop name: foo 
-					Type: ${options.enum.expect.type} 
-					Default: Required 
-					Description: 
-					 One of: One , Two"
-				`);
+"Prop name: foo 
+Type: enum 
+Default: Required 
+Description: 
+ One of: One , Two"
+`);
 			} else {
 				expect(getText(container)).toMatchInlineSnapshot(`
-					"Prop name: foo 
-					Type: ${options.enum.expect.type} 
-					Default: Required 
-					Description:"
-				`);
+"Prop name: foo 
+Type: MyEnum 
+Default: Required 
+Description:"
+`);
 			}
 		});
 

@@ -29,7 +29,7 @@ it('should pass an environment to a user config', () => {
 	const env = 'production';
 	const userConfig = jest.fn();
 	mergeWebpackConfig({}, userConfig, env);
-	expect(userConfig).toBeCalledWith(env);
+	expect(userConfig).toHaveBeenCalledWith(env);
 });
 
 it('should ignore certain sections', () => {
@@ -40,7 +40,7 @@ it('should ignore certain sections', () => {
 	expect(result).toEqual({ entry: 'main', module: { rules: [] } });
 });
 
-it('should ignore certain Webpack plugins', done => {
+it('should ignore certain Webpack plugins', (done) => {
 	const baseInstance = new TerserPlugin();
 	const userInstance = new TerserPlugin();
 	const result = mergeWebpackConfig(
@@ -57,9 +57,20 @@ it('should ignore certain Webpack plugins', done => {
 		return;
 	}
 	expect(result.plugins).toHaveLength(2);
-	expect(result.plugins[0]).toBe(baseInstance);
-	expect(result.plugins[0].constructor.name).toBe('TerserPlugin');
-	expect(result.plugins[1].constructor.name).toBe('MyPlugin');
+	const firstPlugin = result.plugins[0];
+	const secondPlugin = result.plugins[1];
+	expect(firstPlugin).toBe(baseInstance);
+	if (
+		!firstPlugin ||
+		!secondPlugin ||
+		typeof firstPlugin !== 'object' ||
+		typeof secondPlugin !== 'object'
+	) {
+		done.fail('expected plugins');
+		return;
+	}
+	expect(firstPlugin.constructor.name).toBe('TerserPlugin');
+	expect(secondPlugin.constructor.name).toBe('MyPlugin');
 	done();
 });
 

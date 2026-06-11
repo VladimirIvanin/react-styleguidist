@@ -71,5 +71,5 @@ test('should remove #/ from the address bar', () => {
 	const historyWithSpy = { replaceState: jest.fn() };
 
 	renderStyleguide(styleguide, codeRevision, location, doc, historyWithSpy);
-	expect(historyWithSpy.replaceState).toBeCalledWith('', 'My Style Guide', '/pizza?foo=bar');
+	expect(historyWithSpy.replaceState).toHaveBeenCalledWith('', 'My Style Guide', '/pizza?foo=bar');
 });

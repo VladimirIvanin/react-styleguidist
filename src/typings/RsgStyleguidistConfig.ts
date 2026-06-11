@@ -1,4 +1,4 @@
-import WebpackDevServer from 'webpack-dev-server';
+import type { Application } from 'express';
 import { Configuration, LoaderContext } from 'webpack';
 import { TransformOptions } from 'buble';
 import { Handler, DocumentationObject, PropDescriptor } from 'react-docgen';
@@ -30,7 +30,7 @@ interface BaseStyleguidistConfig {
 	configDir: string;
 	context: Record<string, any>;
 	contextDependencies: string[];
-	configureServer(server: WebpackDevServer, env: string): string;
+	configureServer(app: Application, env: string): void;
 	dangerouslyUpdateWebpackConfig: (server: Configuration, env: string) => Configuration;
 	defaultExample: string | false;
 	exampleMode: ExpandMode;

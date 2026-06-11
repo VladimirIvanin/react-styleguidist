@@ -20,5 +20,5 @@ it('renderer should a path line', () => {
 test('should copy text on click', () => {
 	const { getByRole } = render(<PathlineRenderer {...props}>{pathline}</PathlineRenderer>);
 	fireEvent.click(getByRole('button'));
-	expect(copy).toBeCalledWith(pathline);
+	expect(copy).toHaveBeenCalledWith(pathline);
 });

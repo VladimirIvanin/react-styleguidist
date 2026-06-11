@@ -151,7 +151,7 @@ describe('build', () => {
 		const api = styleguidist(config);
 		api.build(callback);
 
-		expect(callback).toBeCalled();
+		expect(callback).toHaveBeenCalled();
 		expect(callback.mock.calls[0][1].components).toBe(config.components);
 		expect(callback.mock.calls[0][2]).toEqual({ stats: true });
 	});
@@ -166,7 +166,7 @@ describe('server', () => {
 		const api = styleguidist(config);
 		api.server(callback);
 
-		expect(callback).toBeCalled();
+		expect(callback).toHaveBeenCalled();
 		expect(callback.mock.calls[0][1].components).toBe(config.components);
 	});
 });

@@ -33,6 +33,6 @@ describe('Editor', () => {
 		const textarea = getByText(code);
 		fireEvent.change(textarea, { target: { value: newCode } });
 
-		expect(onChange).toBeCalledWith(newCode);
+		expect(onChange).toHaveBeenCalledWith(newCode);
 	});
 });

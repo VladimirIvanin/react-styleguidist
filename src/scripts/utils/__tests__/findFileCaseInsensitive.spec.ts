@@ -13,5 +13,5 @@ it('should return undefined if a file doesn’t exist', () => {
 
 it('cache clean function shouldn’t throw', () => {
 	const fn = () => clearCache();
-	expect(fn).not.toThrowError();
+	expect(fn).not.toThrow();
 });

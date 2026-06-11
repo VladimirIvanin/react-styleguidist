@@ -3,6 +3,8 @@ import path from 'path';
 import * as styleguideLoader from '../styleguide-loader';
 import getConfig from '../../scripts/config';
 
+const normalizePaths = (value: string) => value.replace(/\\+/g, '/');
+
 /* eslint-disable quotes */
 
 const file = path.resolve(__dirname, '../../../test/components/Button/Button.js');
@@ -33,8 +35,8 @@ it('should return correct component paths: default glob pattern', () => {
 	} as any);
 	expect(result).toBeTruthy();
 	expect(() => new vm.Script(result)).not.toThrow();
-	expect(result).toMatch(`'filepath': 'src/components/Button.js'`);
-	expect(result).toMatch(`'filepath': 'src/components/Placeholder.js'`);
+	expect(normalizePaths(result)).toMatch(`'filepath': 'src/components/Button.js'`);
+	expect(normalizePaths(result)).toMatch(`'filepath': 'src/components/Placeholder.js'`);
 });
 
 it('should return correct component paths: glob', () => {
@@ -50,9 +52,9 @@ it('should return correct component paths: glob', () => {
 	} as any);
 	expect(result).toBeTruthy();
 	expect(() => new vm.Script(result)).not.toThrow();
-	expect(result).toMatch(`'filepath': 'components/Button/Button.js'`);
-	expect(result).toMatch(`'filepath': 'components/Placeholder/Placeholder.js'`);
-	expect(result).toMatch(`'filepath': 'components/RandomButton/RandomButton.js'`);
+	expect(normalizePaths(result)).toMatch(`'filepath': 'components/Button/Button.js'`);
+	expect(normalizePaths(result)).toMatch(`'filepath': 'components/Placeholder/Placeholder.js'`);
+	expect(normalizePaths(result)).toMatch(`'filepath': 'components/RandomButton/RandomButton.js'`);
 });
 
 it('should return correct component paths: function returning absolute paths', () => {
@@ -75,9 +77,11 @@ it('should return correct component paths: function returning absolute paths', (
 	} as any);
 	expect(result).toBeTruthy();
 	expect(() => new vm.Script(result)).not.toThrow();
-	expect(result).toMatch(`'filepath': 'components/Button/Button.js'`);
-	expect(result).toMatch(`'filepath': 'components/Placeholder/Placeholder.js'`);
-	expect(result).not.toMatch(`'filepath': 'components/RandomButton/RandomButton.js'`);
+	expect(normalizePaths(result)).toMatch(`'filepath': 'components/Button/Button.js'`);
+	expect(normalizePaths(result)).toMatch(`'filepath': 'components/Placeholder/Placeholder.js'`);
+	expect(normalizePaths(result)).not.toMatch(
+		`'filepath': 'components/RandomButton/RandomButton.js'`
+	);
 });
 
 it('should return correct component paths: function returning relative paths', () => {
@@ -100,9 +104,11 @@ it('should return correct component paths: function returning relative paths', (
 	} as any);
 	expect(result).toBeTruthy();
 	expect(() => new vm.Script(result)).not.toThrow();
-	expect(result).toMatch(`'filepath': 'components/Button/Button.js'`);
-	expect(result).toMatch(`'filepath': 'components/Placeholder/Placeholder.js'`);
-	expect(result).not.toMatch(`'filepath': 'components/RandomButton/RandomButton.js'`);
+	expect(normalizePaths(result)).toMatch(`'filepath': 'components/Button/Button.js'`);
+	expect(normalizePaths(result)).toMatch(`'filepath': 'components/Placeholder/Placeholder.js'`);
+	expect(normalizePaths(result)).not.toMatch(
+		`'filepath': 'components/RandomButton/RandomButton.js'`
+	);
 });
 
 it('should return correct component paths: array of of relative paths', () => {
@@ -122,8 +128,8 @@ it('should return correct component paths: array of of relative paths', () => {
 	} as any);
 	expect(result).toBeTruthy();
 	expect(() => new vm.Script(result)).not.toThrow();
-	expect(result).toMatch(`'filepath': 'components/Button/Button.js'`);
-	expect(result).toMatch(`'filepath': 'components/Placeholder/Placeholder.js'`);
+	expect(normalizePaths(result)).toMatch(`'filepath': 'components/Button/Button.js'`);
+	expect(normalizePaths(result)).toMatch(`'filepath': 'components/Placeholder/Placeholder.js'`);
 });
 
 it('should filter out components without examples if skipComponentsWithoutExample=true', () => {
@@ -148,8 +154,10 @@ it('should filter out components without examples if skipComponentsWithoutExampl
 	} as any);
 	expect(result).toBeTruthy();
 	expect(() => new vm.Script(result)).not.toThrow();
-	expect(result).toMatch(`'filepath': 'components/Button/Button.js'`);
-	expect(result).not.toMatch(`'filepath': 'components/RandomButton/RandomButton.js'`);
+	expect(normalizePaths(result)).toMatch(`'filepath': 'components/Button/Button.js'`);
+	expect(normalizePaths(result)).not.toMatch(
+		`'filepath': 'components/RandomButton/RandomButton.js'`
+	);
 });
 
 it('should add context dependencies to webpack from contextDependencies config option', () => {
@@ -167,8 +175,8 @@ it('should add context dependencies to webpack from contextDependencies config o
 		addContextDependency,
 	} as any);
 	expect(addContextDependency).toHaveBeenCalledTimes(2);
-	expect(addContextDependency).toBeCalledWith(contextDependencies[0]);
-	expect(addContextDependency).toBeCalledWith(contextDependencies[1]);
+	expect(addContextDependency).toHaveBeenCalledWith(contextDependencies[0]);
+	expect(addContextDependency).toHaveBeenCalledWith(contextDependencies[1]);
 });
 
 it('should add common parent folder of all components to context dependencies', () => {
@@ -184,7 +192,9 @@ it('should add common parent folder of all components to context dependencies', 
 		addContextDependency,
 	} as any);
 	expect(addContextDependency).toHaveBeenCalledTimes(1);
-	expect(addContextDependency).toBeCalledWith(expect.stringMatching(/test[\\/]components[\\//]$/));
+	expect(addContextDependency).toHaveBeenCalledWith(
+		expect.stringMatching(/test[\\/]components[\\//]$/)
+	);
 });
 
 it('should convert styles and themes as string into requireIt objects', () => {
@@ -197,8 +207,8 @@ it('should convert styles and themes as string into requireIt objects', () => {
 		},
 		addDependency: jest.fn(),
 	} as any);
-	expect(result).toMatch(/require\('path\/to\/styles'\)/);
-	expect(result).toMatch(/require\('path\/to\/theme'\)/);
+	expect(normalizePaths(result)).toMatch(/require\('path\/to\/styles'\)/);
+	expect(normalizePaths(result)).toMatch(/require\('path\/to\/theme'\)/);
 });
 
 it('should flag both styles and theme as dependencies', () => {

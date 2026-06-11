@@ -1,29 +1,29 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`getComponents() should return an object for components 1`] = `
-Array [
-  Object {
+[
+  {
     "filepath": "../../Foo.js",
     "hasExamples": false,
-    "metadata": Object {},
-    "module": Object {
+    "metadata": {},
+    "module": {
       "require": "Foo.js",
     },
     "pathLine": "../../Foo.js",
-    "props": Object {
+    "props": {
       "require": "!!~/src/loaders/props-loader.js!Foo.js",
     },
     "slug": "foo",
   },
-  Object {
+  {
     "filepath": "../../Bar.js",
     "hasExamples": false,
-    "metadata": Object {},
-    "module": Object {
+    "metadata": {},
+    "module": {
       "require": "Bar.js",
     },
     "pathLine": "../../Bar.js",
-    "props": Object {
+    "props": {
       "require": "!!~/src/loaders/props-loader.js!Bar.js",
     },
     "slug": "bar",

@@ -10,5 +10,5 @@ test('should call onClick handler when the button is clicked', () => {
 		</TabButton>
 	);
 	fireEvent.click(getByText(/pizza/i));
-	expect(onClick).toBeCalledTimes(1);
+	expect(onClick).toHaveBeenCalledTimes(1);
 });

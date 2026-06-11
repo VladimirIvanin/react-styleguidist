@@ -1,14 +1,14 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`render should render component 1`] = `
 <section>
   <Section
     depth={3}
     section={
-      Object {
-        "components": Array [],
-        "content": Array [
-          Object {
+      {
+        "components": [],
+        "content": [
+          {
             "content": "<button>OK</button>",
             "evalInContext": [Function],
             "type": "code",
@@ -21,10 +21,10 @@ exports[`render should render component 1`] = `
   <Section
     depth={3}
     section={
-      Object {
-        "components": Array [],
-        "content": Array [
-          Object {
+      {
+        "components": [],
+        "content": [
+          {
             "content": "Hello *world*!",
             "type": "markdown",
           },
@@ -36,14 +36,14 @@ exports[`render should render component 1`] = `
   <Section
     depth={3}
     section={
-      Object {
-        "sections": Array [
-          Object {
-            "content": Array [],
+      {
+        "sections": [
+          {
+            "content": [],
             "name": "One",
           },
-          Object {
-            "content": Array [],
+          {
+            "content": [],
             "name": "Two",
           },
         ],
@@ -56,7 +56,7 @@ exports[`render should render component 1`] = `
 exports[`render should render styled component 1`] = `
 <SectionsRenderer
   classes={
-    Object {
+    {
       "root": "rsg--root-0",
     }
   }
@@ -64,10 +64,10 @@ exports[`render should render styled component 1`] = `
   <Section
     depth={3}
     section={
-      Object {
-        "components": Array [],
-        "content": Array [
-          Object {
+      {
+        "components": [],
+        "content": [
+          {
             "content": "<button>OK</button>",
             "evalInContext": [Function],
             "type": "code",
@@ -80,10 +80,10 @@ exports[`render should render styled component 1`] = `
   <Section
     depth={3}
     section={
-      Object {
-        "components": Array [],
-        "content": Array [
-          Object {
+      {
+        "components": [],
+        "content": [
+          {
             "content": "Hello *world*!",
             "type": "markdown",
           },
@@ -95,14 +95,14 @@ exports[`render should render styled component 1`] = `
   <Section
     depth={3}
     section={
-      Object {
-        "sections": Array [
-          Object {
-            "content": Array [],
+      {
+        "sections": [
+          {
+            "content": [],
             "name": "One",
           },
-          Object {
-            "content": Array [],
+          {
+            "content": [],
             "name": "Two",
           },
         ],
@@ -117,10 +117,10 @@ exports[`should render component renderer 1`] = `
   <Section
     depth={3}
     section={
-      Object {
-        "components": Array [],
-        "content": Array [
-          Object {
+      {
+        "components": [],
+        "content": [
+          {
             "content": "<button>OK</button>",
             "evalInContext": [Function],
             "type": "code",
@@ -133,10 +133,10 @@ exports[`should render component renderer 1`] = `
   <Section
     depth={3}
     section={
-      Object {
-        "components": Array [],
-        "content": Array [
-          Object {
+      {
+        "components": [],
+        "content": [
+          {
             "content": "Hello *world*!",
             "type": "markdown",
           },
@@ -148,14 +148,14 @@ exports[`should render component renderer 1`] = `
   <Section
     depth={3}
     section={
-      Object {
-        "sections": Array [
-          Object {
-            "content": Array [],
+      {
+        "sections": [
+          {
+            "content": [],
             "name": "One",
           },
-          Object {
-            "content": Array [],
+          {
+            "content": [],
             "name": "Two",
           },
         ],

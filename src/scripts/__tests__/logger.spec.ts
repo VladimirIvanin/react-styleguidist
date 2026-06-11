@@ -11,7 +11,7 @@ test('should setup custom logger function', () => {
 	const message = 'pizza';
 	setupLogger({ info }, false);
 	logger.info(message);
-	expect(info).toBeCalledWith(message);
+	expect(info).toHaveBeenCalledWith(message);
 });
 
 test('should setup debug logger in verbose mode', () => {
@@ -19,7 +19,7 @@ test('should setup debug logger in verbose mode', () => {
 	const message = 'pizza';
 	setupLogger({ debug }, true);
 	logger.debug(message);
-	expect(debug).toBeCalledWith(message);
+	expect(debug).toHaveBeenCalledWith(message);
 });
 
 test('should not setup debug logger in non-verbose mode', () => {
@@ -35,5 +35,5 @@ test('should accept default loggers', () => {
 	const message = 'pizza';
 	setupLogger(undefined, false, { info });
 	logger.info(message);
-	expect(info).toBeCalledWith(message);
+	expect(info).toHaveBeenCalledWith(message);
 });

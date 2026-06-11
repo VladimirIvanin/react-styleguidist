@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import Styled, { JssInjectedProps } from './Styled';
 import Context from '../Context';
 

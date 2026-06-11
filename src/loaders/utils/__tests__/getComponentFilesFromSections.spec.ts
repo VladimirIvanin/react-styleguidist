@@ -23,7 +23,8 @@ const sections = [
 	},
 ];
 
-const deabs = (x: string[]) => deabsDeep(x, { root: configDir });
+const deabs = (x: string[]) =>
+	deabsDeep(x, { root: configDir }).map((p) => String(p).replace(/\\+/g, '/'));
 
 it('getComponentFilesFromSections() should return a list of files', () => {
 	const result = getComponentFilesFromSections(sections, configDir);

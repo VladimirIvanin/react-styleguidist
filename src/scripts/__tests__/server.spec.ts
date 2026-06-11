@@ -5,7 +5,7 @@ jest.mock('../create-server', () => () => {
 	return {
 		app: {
 			startCallback: (cb: () => void) => cb(),
-			close: (cb: () => void) => cb(),
+			stopCallback: (cb: () => void) => cb(),
 		},
 		compiler: {},
 	};
@@ -16,9 +16,9 @@ test('server should return an object containing a server instance', () => {
 	const callback = jest.fn();
 	const serverInfo = server(config, callback);
 
-	expect(callback).toBeCalled();
+	expect(callback).toHaveBeenCalled();
 	expect(serverInfo.app).toBeTruthy();
 	expect(serverInfo.compiler).toBeTruthy();
 	expect(typeof serverInfo.app.startCallback).toBe('function');
-	expect(typeof serverInfo.app.close).toBe('function');
+	expect(typeof serverInfo.app.stopCallback).toBe('function');
 });

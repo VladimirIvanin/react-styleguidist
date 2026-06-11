@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Markdown inline should render text in a span 1`] = `
 <span className="rsg--text-11 rsg--inheritSize-12 rsg--baseColor-16">

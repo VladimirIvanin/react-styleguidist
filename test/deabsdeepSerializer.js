@@ -20,7 +20,7 @@ function deabsDeep(obj, options) {
 	const mask = options.mask || MASK;
 
 	const regExp = new RegExp(escape(root), 'g');
-	const deabs = (s) => (typeof s === 'string' ? s.replace(regExp, mask) : s);
+	const deabs = (s) => (typeof s === 'string' ? s.replace(regExp, mask).replace(/\\+/g, '/') : s);
 
 	if (Array.isArray(obj)) {
 		return obj.map(deabs);

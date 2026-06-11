@@ -117,7 +117,7 @@ it('should call a callback when input value changed', () => {
 
 	fireEvent.change(getByRole('textbox'), { target: { value: newSearchTerm } });
 
-	expect(onSearchTermChange).toBeCalledWith(newSearchTerm);
+	expect(onSearchTermChange).toHaveBeenCalledWith(newSearchTerm);
 });
 
 it('should render content of subsections of a section that has no components', () => {
@@ -135,24 +135,24 @@ it('should render content of subsections of a section that has no components', (
 		>
 		  <ComponentsList
 		    items={
-		      Array [
-		        Object {
-		          "components": Array [],
+		      [
+		        {
+		          "components": [],
 		          "content": undefined,
 		          "forcedOpen": false,
 		          "heading": false,
 		          "initialOpen": true,
-		          "sections": Array [],
+		          "sections": [],
 		          "selected": false,
 		          "shouldOpenInNewTab": false,
 		        },
-		        Object {
-		          "components": Array [],
+		        {
+		          "components": [],
 		          "content": undefined,
 		          "forcedOpen": false,
 		          "heading": false,
 		          "initialOpen": true,
-		          "sections": Array [],
+		          "sections": [],
 		          "selected": false,
 		          "shouldOpenInNewTab": false,
 		        },
@@ -168,60 +168,60 @@ it('should render components of a single top section as root', () => {
 	renderer.render(<TableOfContents sections={[{ components }]} />);
 
 	expect(renderer.getRenderOutput()).toMatchInlineSnapshot(`
-<Styled(TableOfContents)
-  onSearchTermChange={[Function]}
-  searchTerm=""
->
-  <ComponentsList
-    items={
-      Array [
-        Object {
-          "components": Array [],
-          "content": undefined,
-          "forcedOpen": false,
-          "heading": false,
-          "href": "#button",
-          "initialOpen": true,
-          "name": "Button",
-          "sections": Array [],
-          "selected": false,
-          "shouldOpenInNewTab": false,
-          "slug": "button",
-          "visibleName": "Button",
-        },
-        Object {
-          "components": Array [],
-          "content": undefined,
-          "forcedOpen": false,
-          "heading": false,
-          "href": "#input",
-          "initialOpen": true,
-          "name": "Input",
-          "sections": Array [],
-          "selected": false,
-          "shouldOpenInNewTab": false,
-          "slug": "input",
-          "visibleName": "Input",
-        },
-        Object {
-          "components": Array [],
-          "content": undefined,
-          "forcedOpen": false,
-          "heading": false,
-          "href": "#textarea",
-          "initialOpen": true,
-          "name": "Textarea",
-          "sections": Array [],
-          "selected": false,
-          "shouldOpenInNewTab": false,
-          "slug": "textarea",
-          "visibleName": "Textarea",
-        },
-      ]
-    }
-  />
-</Styled(TableOfContents)>
-`);
+		<Styled(TableOfContents)
+		  onSearchTermChange={[Function]}
+		  searchTerm=""
+		>
+		  <ComponentsList
+		    items={
+		      [
+		        {
+		          "components": [],
+		          "content": undefined,
+		          "forcedOpen": false,
+		          "heading": false,
+		          "href": "#button",
+		          "initialOpen": true,
+		          "name": "Button",
+		          "sections": [],
+		          "selected": false,
+		          "shouldOpenInNewTab": false,
+		          "slug": "button",
+		          "visibleName": "Button",
+		        },
+		        {
+		          "components": [],
+		          "content": undefined,
+		          "forcedOpen": false,
+		          "heading": false,
+		          "href": "#input",
+		          "initialOpen": true,
+		          "name": "Input",
+		          "sections": [],
+		          "selected": false,
+		          "shouldOpenInNewTab": false,
+		          "slug": "input",
+		          "visibleName": "Input",
+		        },
+		        {
+		          "components": [],
+		          "content": undefined,
+		          "forcedOpen": false,
+		          "heading": false,
+		          "href": "#textarea",
+		          "initialOpen": true,
+		          "name": "Textarea",
+		          "sections": [],
+		          "selected": false,
+		          "shouldOpenInNewTab": false,
+		          "slug": "textarea",
+		          "visibleName": "Textarea",
+		        },
+		      ]
+		    }
+		  />
+		</Styled(TableOfContents)>
+	`);
 });
 
 it('should render as the link will open in a new window only if external presents as true', () => {
@@ -240,41 +240,41 @@ it('should render as the link will open in a new window only if external present
 	);
 
 	expect(renderer.getRenderOutput()).toMatchInlineSnapshot(`
-<Styled(TableOfContents)
-  onSearchTermChange={[Function]}
-  searchTerm=""
->
-  <ComponentsList
-    items={
-      Array [
-        Object {
-          "components": Array [],
-          "content": undefined,
-          "forcedOpen": false,
-          "heading": false,
-          "href": "http://example.com",
-          "initialOpen": true,
-          "sections": Array [],
-          "selected": false,
-          "shouldOpenInNewTab": false,
-        },
-        Object {
-          "components": Array [],
-          "content": undefined,
-          "external": true,
-          "forcedOpen": false,
-          "heading": false,
-          "href": "http://example.com",
-          "initialOpen": true,
-          "sections": Array [],
-          "selected": false,
-          "shouldOpenInNewTab": false,
-        },
-      ]
-    }
-  />
-</Styled(TableOfContents)>
-`);
+		<Styled(TableOfContents)
+		  onSearchTermChange={[Function]}
+		  searchTerm=""
+		>
+		  <ComponentsList
+		    items={
+		      [
+		        {
+		          "components": [],
+		          "content": undefined,
+		          "forcedOpen": false,
+		          "heading": false,
+		          "href": "http://example.com",
+		          "initialOpen": true,
+		          "sections": [],
+		          "selected": false,
+		          "shouldOpenInNewTab": false,
+		        },
+		        {
+		          "components": [],
+		          "content": undefined,
+		          "external": true,
+		          "forcedOpen": false,
+		          "heading": false,
+		          "href": "http://example.com",
+		          "initialOpen": true,
+		          "sections": [],
+		          "selected": false,
+		          "shouldOpenInNewTab": false,
+		        },
+		      ]
+		    }
+		  />
+		</Styled(TableOfContents)>
+	`);
 });
 
 /**

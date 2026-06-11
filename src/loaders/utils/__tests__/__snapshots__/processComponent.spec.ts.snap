@@ -1,15 +1,15 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`processComponent() should return an object for section with content 1`] = `
-Object {
+{
   "filepath": "../../../../pizza.js",
   "hasExamples": true,
-  "metadata": Object {},
-  "module": Object {
+  "metadata": {},
+  "module": {
     "require": "pizza.js",
   },
   "pathLine": "../../../../pizza.js",
-  "props": Object {
+  "props": {
     "require": "!!~/src/loaders/props-loader.js!pizza.js",
   },
   "slug": "pizza",

@@ -151,7 +151,7 @@ interface MarkdownProps {
 
 export const Markdown: React.FunctionComponent<MarkdownProps> = ({ text, inline }) => {
 	const overrides = inline ? inlineOverrides : baseOverrides;
-	return compiler(stripHtmlComments(text), { overrides, forceBlock: true });
+	return <>{compiler(stripHtmlComments(text), { overrides, forceBlock: true })}</>;
 };
 
 Markdown.propTypes = {

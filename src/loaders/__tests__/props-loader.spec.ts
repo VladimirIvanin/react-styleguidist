@@ -7,6 +7,7 @@ import sortBy from 'lodash/sortBy';
 import config from '../../scripts/schemas/config';
 import propsLoader from '../props-loader';
 
+const normalizePaths = (value: string) => value.replace(/\\+/g, '/');
 const logger = glogg('rsg');
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -42,10 +43,12 @@ it('should extract doclets', () => {
 
 	expect(() => new vm.Script(result)).not.toThrow();
 	expect(result.includes('makeABarrelRoll')).toBe(false);
-	expect(result).toMatch('getImageUrl');
-	expect(result).toMatch(/'see': '\{@link link\}'/);
-	expect(result).toMatch(/'link': 'link'/);
-	expect(result).toMatch(/require\('!!.*?\/loaders\/examples-loader\.js!\.\/examples.md'\)/);
+	expect(normalizePaths(result)).toMatch('getImageUrl');
+	expect(normalizePaths(result)).toMatch(/'see': '\{@link link\}'/);
+	expect(normalizePaths(result)).toMatch(/'link': 'link'/);
+	expect(normalizePaths(result)).toMatch(
+		/require\('!!.*?\/loaders\/examples-loader\.js!\.\/examples.md'\)/
+	);
 });
 
 describe('property sorting', () => {
@@ -62,7 +65,7 @@ describe('property sorting', () => {
 
 		expect(() => new vm.Script(result)).not.toThrow();
 		expect(result.includes('makeABarrelRoll')).toBe(false);
-		expect(result).toMatch(
+		expect(normalizePaths(result)).toMatch(
 			/props[\s\S]*?name': 'symbol'[\s\S]*?name': 'value'[\s\S]*?name': 'emphasize'[\s\S]*?name': 'unit'/m
 		);
 	});
@@ -80,7 +83,7 @@ describe('property sorting', () => {
 
 		expect(() => new vm.Script(result)).not.toThrow();
 		expect(result.includes('makeABarrelRoll')).toBe(false);
-		expect(result).toMatch(
+		expect(normalizePaths(result)).toMatch(
 			/props[\s\S]*?name': 'value'[\s\S]*?name': 'unit'[\s\S]*?name': 'emphasize'[\s\S]*?name': 'symbol'/m
 		);
 	});
@@ -109,7 +112,7 @@ describe('property sorting', () => {
 
 		expect(() => new vm.Script(result)).not.toThrow();
 		expect(result.includes('makeABarrelRoll')).toBe(false);
-		expect(result).toMatch(
+		expect(normalizePaths(result)).toMatch(
 			/props[\s\S]*?name': 'unit'[\s\S]*?name': 'emphasize'[\s\S]*?name': 'value'[\s\S]*?name': 'symbol'/m
 		);
 	});
@@ -165,7 +168,7 @@ it('should attach examples from Markdown file', () => {
 	expect(result).toBeTruthy();
 
 	expect(() => new vm.Script(result)).not.toThrow();
-	expect(result).toMatch(
+	expect(normalizePaths(result)).toMatch(
 		/require\('!!.*?\/loaders\/examples-loader\.js\?displayName=Button&file=\.%2FButton\.js&shouldShowDefaultExample=false!test\/components\/Button\/Readme\.md'\)/
 	);
 });
@@ -185,7 +188,7 @@ it('should warn if no componets are exported', () => {
 	expect(result).toBeTruthy();
 
 	expect(() => new vm.Script(result)).not.toThrow();
-	expect(warn).toBeCalledWith(expect.stringMatching('doesn’t export a component'));
+	expect(warn).toHaveBeenCalledWith(expect.stringMatching('doesn’t export a component'));
 });
 
 it('should warn if a file cannot be parsed', () => {
@@ -203,7 +206,7 @@ it('should warn if a file cannot be parsed', () => {
 	expect(result).toBeTruthy();
 
 	expect(() => new vm.Script(result)).not.toThrow();
-	expect(warn).toBeCalledWith(expect.stringMatching('Cannot parse'));
+	expect(warn).toHaveBeenCalledWith(expect.stringMatching('Cannot parse'));
 });
 
 it('should add context dependencies to webpack from contextDependencies config option', () => {
@@ -221,8 +224,8 @@ it('should add context dependencies to webpack from contextDependencies config o
 
 	expect(() => new vm.Script(result)).not.toThrow();
 	expect(addContextDependency).toHaveBeenCalledTimes(2);
-	expect(addContextDependency).toBeCalledWith(contextDependencies[0]);
-	expect(addContextDependency).toBeCalledWith(contextDependencies[1]);
+	expect(addContextDependency).toHaveBeenCalledWith(contextDependencies[0]);
+	expect(addContextDependency).toHaveBeenCalledWith(contextDependencies[1]);
 });
 
 it('should update the returned props object after enhancing from the updateDocs config option', () => {

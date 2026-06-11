@@ -1,6 +1,8 @@
+import type { Application } from 'express';
 import webpack from 'webpack';
 import WebpackDevServer, { Configuration } from 'webpack-dev-server';
 import makeWebpackConfig from './make-webpack-config';
+import normalizeDevServerOptions from './utils/normalizeDevServerOptions';
 import * as Rsg from '../typings';
 
 export default function createServer(
@@ -36,7 +38,7 @@ export default function createServer(
 	// Allow custom devServer options to override base config.
 	webpackConfig.devServer = {
 		...baseConfig,
-		...webpackConfig.devServer,
+		...normalizeDevServerOptions(webpackConfig.devServer),
 	};
 
 	const compiler = webpack(webpackConfig);
@@ -44,7 +46,7 @@ export default function createServer(
 
 	// User defined customizations
 	if (config.configureServer) {
-		config.configureServer((devServer as any).app, env);
+		config.configureServer(devServer.app as Application, env);
 	}
 
 	return { app: devServer, compiler };

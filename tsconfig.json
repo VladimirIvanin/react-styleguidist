@@ -17,6 +17,6 @@
     }
   },
   "files": ["dangerfile.ts"],
-  "include": ["src"],
+  "include": ["src", "src/jest-dom.d.ts"],
   "exclude": ["node_modules"]
 }

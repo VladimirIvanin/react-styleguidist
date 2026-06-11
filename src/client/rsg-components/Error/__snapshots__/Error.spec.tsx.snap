@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`renderer should render error message 1`] = `
 <div>
@@ -15,7 +15,7 @@ exports[`renderer should render error message 1`] = `
       <a
         href="https://github.com/styleguidist/react-styleguidist/issues"
         style={
-          Object {
+          {
             "color": "inherit",
           }
         }

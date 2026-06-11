@@ -94,7 +94,7 @@ it('processSection() should return an object for section with content', () => {
 it('processSection() should throw when content file not found', () => {
 	const fn = () => processSection({ content: 'pizza' }, config);
 
-	expect(fn).toThrowError('Section content file not found');
+	expect(fn).toThrow('Section content file not found');
 });
 
 it('processSection() should return an object for section with components', () => {
@@ -151,7 +151,7 @@ it('getSections() should return an array of sectionsWithDepth with sectionDepth 
 
 it('getSections() should make custom options by user available', () => {
 	const result = getSections(sectionsWithDepth, config);
-	const expandSection = result.find(section => section.name === 'Components');
+	const expandSection = result.find((section) => section.name === 'Components');
 	expect(expandSection).toHaveProperty('expand');
 });
 

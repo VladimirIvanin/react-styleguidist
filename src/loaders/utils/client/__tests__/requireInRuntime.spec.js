@@ -12,5 +12,5 @@ test('return a module from the map', () => {
 
 test('throw if module is not in the map', () => {
 	const fn = () => requireInRuntime(map, 'pizza');
-	expect(fn).toThrowError('require() statements can be added');
+	expect(fn).toThrow('require() statements can be added');
 });

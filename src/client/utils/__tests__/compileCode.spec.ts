@@ -7,17 +7,17 @@ describe('compileCode', () => {
 	test('compile ES6 to ES5', () => {
 		const result = compileCode(`const {foo, bar} = baz`, compilerConfig);
 		expect(result).toMatchInlineSnapshot(`
-"var foo = baz.foo;
-var bar = baz.bar;"
-`);
+		"var foo = baz.foo;
+		var bar = baz.bar;"
+	`);
 	});
 
 	test('transform imports to require()', () => {
 		const result = compileCode(`import foo from 'bar'`, compilerConfig);
 		expect(result).toMatchInlineSnapshot(`
-"const bar$0 = require('bar');
-const foo = bar$0.default || bar$0;"
-`);
+		"const bar$0 = require('bar');
+		const foo = bar$0.default || bar$0;"
+	`);
 	});
 
 	test('transform async/await is not throw an error', () => {
@@ -42,13 +42,13 @@ import Button from 'button';
 			compilerConfig
 		);
 		expect(result).toMatchInlineSnapshot(`
-"
-const bar$0 = require('bar');
-const foo = bar$0.default || bar$0;
-const button$0 = require('button');
-const Button = button$0.default || button$0;
-React.createElement( Button, null )"
-`);
+		"
+		const bar$0 = require('bar');
+		const foo = bar$0.default || bar$0;
+		const button$0 = require('button');
+		const Button = button$0.default || button$0;
+		React.createElement( Button, null )"
+	`);
 	});
 
 	test('wrap JSX in Fragment if adjacent on line 1', () => {
@@ -72,12 +72,12 @@ React.createElement( Button, null )"
 			compilerConfig
 		);
 		expect(result).toMatchInlineSnapshot(`
-"var foo = baz.foo;
-var bar = baz.bar;
-React.createElement( 'div', null,
-  React.createElement( 'button', null, \\"Click\\" )
-)"
-`);
+		"var foo = baz.foo;
+		var bar = baz.bar;
+		React.createElement( 'div', null,
+		  React.createElement( 'button', null, "Click" )
+		)"
+	`);
 	});
 
 	test('tagged template literals', () => {
@@ -90,11 +90,11 @@ React.createElement( 'div', null,
 			compilerConfig
 		);
 		expect(result).toMatchInlineSnapshot(`
-"var templateObject = Object.freeze([\\"\\\\n\\\\tcolor: tomato;\\\\n\\"]);
-var Button = styled.button(templateObject);
-React.createElement( Button, null )
-"
-`);
+		"var templateObject = Object.freeze(["\\n\\tcolor: tomato;\\n"]);
+		var Button = styled.button(templateObject);
+		React.createElement( Button, null )
+		"
+	`);
 	});
 
 	test('onError callback', () => {

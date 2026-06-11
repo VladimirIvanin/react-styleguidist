@@ -159,7 +159,7 @@ it('should absolutize defaultExample if it is a string', () => {
 	const result = getConfig({
 		defaultExample: 'src/components/Button.md',
 	});
-	expect(result.defaultExample).toMatch(/^\//);
+	expect(path.isAbsolute(result.defaultExample as string)).toBe(true);
 });
 
 it('should throw if defaultExample does not exist', () => {

@@ -38,7 +38,7 @@ text
 	);
 
 	expect(result).toBeTruthy();
-	expect(() => new Function(result)).not.toThrowError(SyntaxError);
+	expect(() => new Function(result)).not.toThrow(SyntaxError);
 });
 
 it('should replace all occurrences of __COMPONENT__ with provided query.displayName', () => {
@@ -62,7 +62,7 @@ it('should replace all occurrences of __COMPONENT__ with provided query.displayN
 	expect(result).not.toMatch(/__COMPONENT__/);
 	const componentHtml = result.match(/<div>(.*?)<\/div>/);
 	expect(componentHtml && componentHtml[0]).toMatchInlineSnapshot(
-		`"<div>\\\\n\\\\t<FooComponent>\\\\n\\\\t\\\\t<span>text</span>\\\\n\\\\t\\\\t<span>Name of component: FooComponent</span>\\\\n\\\\t</FooComponent>\\\\n\\\\t<FooComponent />\\\\n</div>"`
+		`"<div>\\n\\t<FooComponent>\\n\\t\\t<span>text</span>\\n\\t\\t<span>Name of component: FooComponent</span>\\n\\t</FooComponent>\\n\\t<FooComponent />\\n</div>"`
 	);
 });
 
@@ -83,7 +83,7 @@ it('should pass updateExample function from config to chunkify', () => {
 		} as any,
 		exampleMarkdown
 	);
-	expect(updateExample).toBeCalledWith(
+	expect(updateExample).toHaveBeenCalledWith(
 		{
 			content: '<h1>Hello world!</h2>',
 			settings: { static: true },
@@ -113,7 +113,7 @@ Two:
 	);
 
 	expect(result).toBeTruthy();
-	expect(() => new Function(result)).not.toThrowError(SyntaxError);
+	expect(() => new Function(result)).not.toThrow(SyntaxError);
 	expect(result).toMatch(`'lodash': require('lodash')`);
 	expect(result).toMatch(`'react': require('react')`);
 });
@@ -134,7 +134,7 @@ One:
 	);
 
 	expect(result).toBeTruthy();
-	expect(() => new Function(result)).not.toThrowError(SyntaxError);
+	expect(() => new Function(result)).not.toThrow(SyntaxError);
 	expect(result).toMatch(`'lodash': require('lodash')`);
 	expect(result).toMatch(`'react': require('react')`);
 });
@@ -153,7 +153,7 @@ it('should work with multiple JSX element on the root level', () => {
 	);
 
 	expect(result).toBeTruthy();
-	expect(() => new Function(result)).not.toThrowError(SyntaxError);
+	expect(() => new Function(result)).not.toThrow(SyntaxError);
 });
 
 it('should prepend example code with React require()', () => {
@@ -167,7 +167,7 @@ it('should prepend example code with React require()', () => {
 	);
 
 	expect(result).toBeTruthy();
-	expect(() => new Function(result)).not.toThrowError(SyntaxError);
+	expect(() => new Function(result)).not.toThrow(SyntaxError);
 	expect(result).toMatch(
 		`const React$0 = require('react');\\nconst React = React$0.default || (React$0['React'] || React$0);`
 	);
@@ -184,7 +184,7 @@ it('should prepend example code with component require()', () => {
 	);
 
 	expect(result).toBeTruthy();
-	expect(() => new Function(result)).not.toThrowError(SyntaxError);
+	expect(() => new Function(result)).not.toThrow(SyntaxError);
 	expect(result).toMatch(
 		`const FooComponent$0 = require('../foo.js');\\nconst FooComponent = FooComponent$0.default || (FooComponent$0['FooComponent'] || FooComponent$0);`
 	);
@@ -201,7 +201,7 @@ it('should prepend example code with root component require() for sub components
 	);
 
 	expect(result).toBeTruthy();
-	expect(() => new Function(result)).not.toThrowError(SyntaxError);
+	expect(() => new Function(result)).not.toThrow(SyntaxError);
 	expect(result).toMatch(
 		`const FooComponentSubComponent$0 = require('../fooSub.js');\\nconst FooComponentSubComponent = FooComponentSubComponent$0.default || (FooComponentSubComponent$0['FooComponentSubComponent'] || FooComponentSubComponent$0);`
 	);
@@ -221,7 +221,7 @@ it('should allow explicit import of React and component module', () => {
 	);
 
 	expect(result).toBeTruthy();
-	expect(() => new Function(result)).not.toThrowError(SyntaxError);
+	expect(() => new Function(result)).not.toThrow(SyntaxError);
 	expect(result).toMatch(
 		`const React$0 = require('react');\\nconst React = React$0.default || (React$0['React'] || React$0);`
 	);
@@ -244,7 +244,7 @@ it('should works for any Markdown file, without a current component', () => {
 	);
 
 	expect(result).toBeTruthy();
-	expect(() => new Function(result)).not.toThrowError(SyntaxError);
+	expect(() => new Function(result)).not.toThrow(SyntaxError);
 	expect(result).toMatch(
 		`const React$0 = require('react');\\nconst React = React$0.default || (React$0['React'] || React$0);`
 	);

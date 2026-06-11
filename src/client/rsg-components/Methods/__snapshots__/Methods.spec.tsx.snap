@@ -1,18 +1,18 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`MethodsRenderer should render a table 1`] = `
 <Styled(Table)
   columns={
-    Array [
-      Object {
+    [
+      {
         "caption": "Method name",
         "render": [Function],
       },
-      Object {
+      {
         "caption": "Parameters",
         "render": [Function],
       },
-      Object {
+      {
         "caption": "Description",
         "render": [Function],
       },
@@ -20,12 +20,12 @@ exports[`MethodsRenderer should render a table 1`] = `
   }
   getRowKey={[Function]}
   rows={
-    Array [
-      Object {
+    [
+      {
         "description": "Public",
-        "modifiers": Array [],
+        "modifiers": [],
         "name": "method",
-        "params": Array [],
+        "params": [],
       },
     ]
   }
@@ -44,15 +44,15 @@ exports[`PropsRenderer should render JsDoc tags 1`] = `
     </div>
     <div>
       <Styled(Arguments)
-        args={Array []}
+        args={[]}
       />
     </div>
     <div>
       <div>
         <JsDoc
           since={
-            Array [
-              Object {
+            [
+              {
                 "description": "1.0.0",
                 "title": "since",
               },
@@ -77,15 +77,15 @@ exports[`PropsRenderer should render deprecated JsDoc tags 1`] = `
     </div>
     <div>
       <Styled(Arguments)
-        args={Array []}
+        args={[]}
       />
     </div>
     <div>
       <div>
         <JsDoc
           deprecated={
-            Array [
-              Object {
+            [
+              {
                 "description": "Use *another* method",
                 "title": "description",
               },
@@ -111,12 +111,12 @@ exports[`PropsRenderer should render parameters 1`] = `
     <div>
       <Styled(Arguments)
         args={
-          Array [
-            Object {
+          [
+            {
               "description": "Description",
               "name": "value",
               "optional": false,
-              "type": Object {
+              "type": {
                 "name": "Number",
               },
             },
@@ -148,7 +148,7 @@ exports[`PropsRenderer should render public method 1`] = `
     </div>
     <div>
       <Styled(Arguments)
-        args={Array []}
+        args={[]}
       />
     </div>
     <div>
@@ -175,7 +175,7 @@ exports[`PropsRenderer should render returns 1`] = `
     </div>
     <div>
       <Styled(Arguments)
-        args={Array []}
+        args={[]}
       />
     </div>
     <div>
@@ -185,7 +185,7 @@ exports[`PropsRenderer should render returns 1`] = `
           description="Description"
           returns={true}
           type={
-            Object {
+            {
               "name": "Number",
             }
           }
